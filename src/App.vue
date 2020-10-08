@@ -12,7 +12,7 @@
         @remove-task="removeTask"
     ></TaskItem>
     <p> {{ message }}</p>
-    <add-task @add-task="addTask()"></add-task>
+    <add-task @add-task="addTask"></add-task>
 
   </div>
 </template>
@@ -29,27 +29,25 @@ export default {
       },
   data () {
     return {
-      taskList: [{
-        id: '1',
-        name: 'Task A',
-        status: 'Pending',
-      }, {
-        id: '2',
-        name: 'Task B',
-        status: 'Complete',
-      }, {
-        id: '3',
-        name: 'Task C',
-        status: 'Pending',
-      }, {
-        id: '4',
-        name: 'Task D',
-        status: 'Complete',
-      }
-
+      taskList: [
+      //     {
+      //   id: '1',
+      //   name: 'Task A',
+      //   status: 'Pending',
+      // }, {
+      //   id: '2',
+      //   name: 'Task B',
+      //   status: 'Complete',
+      // }, {
+      //   id: '3',
+      //   name: 'Task C',
+      //   status: 'Pending',
+      // }, {
+      //   id: '4',
+      //   name: 'Task D',
+      //   status: 'Complete',
+      // }
       ],
-      nameInput: '',
-      statusInput: 'Pending',
     }
   },
   methods:{
@@ -61,13 +59,13 @@ export default {
       taskPicked.status = "Complete";
     },
     addTask(newTaskName,pendingStat){
-      //console.log(taskName);
+      console.log(newTaskName);
       const newTask = {
         id: new Date().toISOString(),
         name: newTaskName,
         status: pendingStat,
       }
-      console.log(newTask);
+      //console.log(newTask);
       this.taskList.push(newTask);
     },
     removeTask(id){
