@@ -9,46 +9,23 @@
         :taskName = "task.name"
         :taskStatus = "task.status"
         @toggle-complete = "markAsComplete"
+        @remove-task="removeTask"
     ></TaskItem>
-<!--    <section>-->
-<!--      <table>-->
-<!--        <thead>-->
-<!--        <th>Task Name</th>-->
-<!--        <th>Status</th>-->
-<!--        </thead>-->
-
-<!--        <tbody v-for="(task, index) in taskList" :key="index">-->
-<!--        <tr>-->
-<!--          <td> {{task.name}} </td>-->
-<!--          <td> {{task.status}} </td>-->
-<!--          <button v-if="task.status=='Pending'" @click="markAsComplete(index)">Mark as Complete</button>-->
-<!--          <button @click="removeTask(index)"> Remove Task </button>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--      </table>-->
-<!--      <p> {{ message }}</p>-->
-<!--    </section>-->
-
-<!--    <section>-->
-<!--      <input type="text" v-model="nameInput">-->
-
-<!--      <button v-if="isEmpty()==true" disabled>Add Task</button>-->
-<!--      <button v-if="isEmpty()==false" @click="addTask">Add Task</button>-->
-<!--      <button @click="clearInput()">Clear</button>-->
-<!--    </section>-->
-
-
+    <p> {{ message }}</p>
+    <add-task @add-task="addTask()"></add-task>
 
   </div>
 </template>
 
 <script>
 import TaskItem from './components/TaskItem.vue'
+import AddTask from './components/AddTask.vue'
 
 export default {
   name: 'App',
   components: {
-        TaskItem
+        TaskItem,
+        AddTask
       },
   data () {
     return {
@@ -64,6 +41,10 @@ export default {
         id: '3',
         name: 'Task C',
         status: 'Pending',
+      }, {
+        id: '4',
+        name: 'Task D',
+        status: 'Complete',
       }
 
       ],
@@ -79,39 +60,36 @@ export default {
       );
       taskPicked.status = "Complete";
     },
-    // removeTask(idx) {
-    //   this.taskList.splice(idx, 1);
-    // },
-    // addTask(){
-    //   this.taskList.push({name:this.nameInput, status:'Pending'});
-    //   this.nameInput = '';
-    // },
-
-    // isEmpty(){
-    //   if(this.nameInput===""){
-    //     return true;
-    //   } else{
-    //     return false;
-    //   }
-    // },
-    // clearInput(){
-    //   this.nameInput = '';
-    // }
+    addTask(newTaskName,pendingStat){
+      //console.log(taskName);
+      const newTask = {
+        id: new Date().toISOString(),
+        name: newTaskName,
+        status: pendingStat,
+      }
+      console.log(newTask);
+      this.taskList.push(newTask);
+    },
+    removeTask(id){
+      this.taskList = this.taskList.filter(
+          (friend) => friend.id !== id
+      );
+    }
   },
-  // computed: {
-  //   message() {
-  //     //you can reference other computed properties
-  //     if (this.hasTask){
-  //       return 'You have no tasks';
-  //     } else if (this.taskList.some(el => el.status === 'Pending')){
-  //       return 'You have some pending tasks';
-  //     }
-  //       return 'All tasks are completed.';
-  //   },
-  //   hasTask() {
-  //     return this.taskList.length===0;
-  //   }
-  // }
+  computed: {
+    message() {
+      //you can reference other computed properties
+      if (this.hasTask){
+        return 'You have no tasks';
+      } else if (this.taskList.some(el => el.status === 'Pending')){
+        return 'You have some pending tasks';
+      }
+        return 'All tasks are completed.';
+    },
+    hasTask() {
+      return this.taskList.length===0;
+    }
+  }
 }
 </script>
 

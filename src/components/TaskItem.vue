@@ -1,6 +1,7 @@
 <template>
   <li> {{taskName}} <strong>{{taskStatus}}</strong>
      <button v-if="taskStatus==='Pending'" @click="toggleComplete"> Mark As Completed </button>
+    <button @click="removeTask"> Remove </button>
   </li>
 </template>
 
@@ -25,7 +26,10 @@ name: 'task-item',
   methods: {
     toggleComplete(){
       this.$emit('toggle-complete', this.id)
-    }
+    },
+    removeTask() {
+      this.$emit('remove-task', this.id);
+    },
   }
 
 
