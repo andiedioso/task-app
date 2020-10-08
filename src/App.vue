@@ -17,8 +17,8 @@
           <button @click="removeTask(index)"> Remove Task </button>
         </tr>
         </tbody>
-
       </table>
+      <p> {{ message }}</p>
     </section>
 
     <section>
@@ -56,7 +56,7 @@ export default {
       this.taskList.splice(idx, 1);
     },
     isEmpty(){
-      if(this.nameInput==""){
+      if(this.nameInput===""){
         return true;
       } else{
         return false;
@@ -64,6 +64,18 @@ export default {
     },
     clearInput(){
       this.nameInput = '';
+    }
+  },
+  computed: {
+    message() {
+      if (this.taskList.length===0){
+        return 'You have no tasks';
+      } else if (this.taskList.some(el => el.status === 'Pending')){
+        return 'You have some pending tasks';
+      }
+        return 'All tasks are completed.';
+    },
+    hasTask() {
     }
   }
 }
