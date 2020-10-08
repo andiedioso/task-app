@@ -48,27 +48,28 @@ export default {
     markAsComplete(idx){
       this.taskList[idx].status = 'Completed';
     },
-    addTask(){
-      this.taskList.push({name:this.nameInput, status:'Pending'});
-      this.nameInput = '';
-    },
+    // addTask(){
+    //   this.taskList.push({name:this.nameInput, status:'Pending'});
+    //   this.nameInput = '';
+    // },
     removeTask(idx) {
       this.taskList.splice(idx, 1);
     },
-    isEmpty(){
-      if(this.nameInput===""){
-        return true;
-      } else{
-        return false;
-      }
-    },
-    clearInput(){
-      this.nameInput = '';
-    }
+    // isEmpty(){
+    //   if(this.nameInput===""){
+    //     return true;
+    //   } else{
+    //     return false;
+    //   }
+    // },
+    // clearInput(){
+    //   this.nameInput = '';
+    // }
   },
   computed: {
     message() {
-      if (this.taskList.length===0){
+      //you can reference other computed properties
+      if (this.hasTask){
         return 'You have no tasks';
       } else if (this.taskList.some(el => el.status === 'Pending')){
         return 'You have some pending tasks';
@@ -76,6 +77,7 @@ export default {
         return 'All tasks are completed.';
     },
     hasTask() {
+      return this.taskList.length===0;
     }
   }
 }
