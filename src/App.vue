@@ -2,7 +2,14 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
     <h1> Tasks </h1>
-
+    <TaskItem
+        v-for="task in taskList"
+        :key="task.id"
+        :id="task.id"
+        :taskName = "task.name"
+        :taskStatus = "task.status"
+        @toggle-complete = "markAsComplete"
+    ></TaskItem>
 <!--    <section>-->
 <!--      <table>-->
 <!--        <thead>-->
@@ -29,7 +36,8 @@
 <!--      <button v-if="isEmpty()==false" @click="addTask">Add Task</button>-->
 <!--      <button @click="clearInput()">Clear</button>-->
 <!--    </section>-->
-      <TaskItem></TaskItem>
+
+
 
   </div>
 </template>
@@ -45,12 +53,15 @@ export default {
   data () {
     return {
       taskList: [{
+        id: '1',
         name: 'Task A',
         status: 'Pending',
       }, {
+        id: '2',
         name: 'Task B',
         status: 'Complete',
       }, {
+        id: '3',
         name: 'Task C',
         status: 'Pending',
       }
@@ -61,16 +72,21 @@ export default {
     }
   },
   methods:{
-    markAsComplete(idx){
-      this.taskList[idx].status = 'Completed';
+    markAsComplete(id){
+      //find() returns a value that satisfies the condition
+      const taskPicked = this.taskList.find(
+          (el) => el.id === id
+      );
+      taskPicked.status = "Complete";
     },
+    // removeTask(idx) {
+    //   this.taskList.splice(idx, 1);
+    // },
     // addTask(){
     //   this.taskList.push({name:this.nameInput, status:'Pending'});
     //   this.nameInput = '';
     // },
-    removeTask(idx) {
-      this.taskList.splice(idx, 1);
-    },
+
     // isEmpty(){
     //   if(this.nameInput===""){
     //     return true;
@@ -82,20 +98,20 @@ export default {
     //   this.nameInput = '';
     // }
   },
-  computed: {
-    message() {
-      //you can reference other computed properties
-      if (this.hasTask){
-        return 'You have no tasks';
-      } else if (this.taskList.some(el => el.status === 'Pending')){
-        return 'You have some pending tasks';
-      }
-        return 'All tasks are completed.';
-    },
-    hasTask() {
-      return this.taskList.length===0;
-    }
-  }
+  // computed: {
+  //   message() {
+  //     //you can reference other computed properties
+  //     if (this.hasTask){
+  //       return 'You have no tasks';
+  //     } else if (this.taskList.some(el => el.status === 'Pending')){
+  //       return 'You have some pending tasks';
+  //     }
+  //       return 'All tasks are completed.';
+  //   },
+  //   hasTask() {
+  //     return this.taskList.length===0;
+  //   }
+  // }
 }
 </script>
 
