@@ -2,17 +2,16 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
     <h1> Tasks </h1>
-    <TaskItem
+    <task-item
         v-for="task in taskList"
         :key="task.id"
-        :id="task.id"
-        :taskName = "task.name"
-        :taskStatus = "task.status"
+        :task="task"
         @toggle-complete = "markAsComplete"
         @remove-task="removeTask"
-    ></TaskItem>
+    ></task-item>
+
     <p> {{ message }}</p>
-    <add-task @add-task="addTask"></add-task>
+    <add-task @add-task="addTask"/>
 
   </div>
 </template>
@@ -30,23 +29,7 @@ export default {
   data () {
     return {
       taskList: [
-      //     {
-      //   id: '1',
-      //   name: 'Task A',
-      //   status: 'Pending',
-      // }, {
-      //   id: '2',
-      //   name: 'Task B',
-      //   status: 'Complete',
-      // }, {
-      //   id: '3',
-      //   name: 'Task C',
-      //   status: 'Pending',
-      // }, {
-      //   id: '4',
-      //   name: 'Task D',
-      //   status: 'Complete',
-      // }
+
       ],
     }
   },
@@ -56,12 +39,14 @@ export default {
       const taskPicked = this.taskList.find(
           (el) => el.id === id
       );
+      //check for null
+
       taskPicked.status = "Complete";
     },
     addTask(newTaskName,pendingStat){
       console.log(newTaskName);
       const newTask = {
-        id: new Date().toISOString(),
+        id: this.uuidv4(),
         name: newTaskName,
         status: pendingStat,
       }
@@ -72,6 +57,12 @@ export default {
       this.taskList = this.taskList.filter(
           (friend) => friend.id !== id
       );
+    },
+    uuidv4() {
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+      });
     }
   },
   computed: {

@@ -1,8 +1,8 @@
 <template>
-  <div id="addtask">
+  <div id="taskForm">
     <form @submit.prevent="submitData">
-      <label>Task Name</label>
-      <input type="text" v-model="enteredTaskName">
+      <label for="taskName">Task Name</label>
+      <input id="taskName" type="text" v-model="enteredTaskName">
       <button :disabled="isEmpty()"> Add Task </button>
     </form>
     <button @click="clearInput"> Clear </button>
@@ -13,7 +13,7 @@
 <script>
 export default {
 name: "AddTask",
-  // emits: ['add-task'],
+ emits: ['add-task'],
   data(){
     return {
       enteredTaskName: '',
@@ -26,10 +26,10 @@ name: "AddTask",
     },
     submitData(){
       this.$emit('add-task', this.enteredTaskName, this.defaultStatus);
-      // console.log(this.enteredTaskName);
-      // console.log(this.defaultStatus);
       this.enteredTaskName = '';
     },
+
+    //isEmpty could be a computed property
     isEmpty(){
       return this.enteredTaskName==="";
     },

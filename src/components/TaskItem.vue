@@ -1,6 +1,6 @@
 <template>
-  <li> {{taskName}} <strong>{{taskStatus}}</strong>
-     <button v-if="taskStatus==='Pending'" @click="toggleComplete"> Mark As Completed </button>
+  <li> {{task.name}} <strong>{{task.status}}</strong>
+     <button v-if="task.status==='Pending'" @click="toggleComplete"> Mark As Completed </button>
     <button @click="removeTask"> Remove </button>
   </li>
 </template>
@@ -9,26 +9,17 @@
 export default {
 name: 'task-item',
   props: {
-    id: {
-      type: String,
-      required: true,
-    },
-    taskName: {
-      type: String,
-      required: true,
-    },
-    taskStatus: {
-      type: String,
-      required: true,
-      default: 'Pending',
+    task: {
+      type: Object,
+      required: true
     }
   },
   methods: {
     toggleComplete(){
-      this.$emit('toggle-complete', this.id)
+      this.$emit('toggle-complete', this.task.id)
     },
     removeTask() {
-      this.$emit('remove-task', this.id);
+      this.$emit('remove-task', this.task.id);
     },
   }
 
