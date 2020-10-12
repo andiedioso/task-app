@@ -1,7 +1,9 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
     <h1> Tasks </h1>
+    <p> {{ message }}</p>
+    <hr>
+    <add-task @add-task="addTask"/>
     <task-item
         v-for="task in taskList"
         :key="task.id"
@@ -10,8 +12,7 @@
         @remove-task="removeTask"
     ></task-item>
 
-    <p> {{ message }}</p>
-    <add-task @add-task="addTask"/>
+
 
   </div>
 </template>
@@ -88,7 +89,32 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  color: white;
+  background-color: #42b883;
+  margin: 5vh auto;
+  padding: 3vh 0;
+  width: 70vw;
+  max-width: 800px;
+  border-radius: 10px;
 }
+
+
+hr{
+  border-color: white;
+  background-color: white;
+  border-top: none;
+  width: 75%;
+}
+
+li {
+  background-color: #89e8bd;
+  padding: 3% 2%;
+  margin: 1.5% 0.5%;
+  text-align: left;
+  color: #34495E;
+  width: 95%;
+  border-radius: 5px;
+  list-style-type: none;
+}
+
 </style>

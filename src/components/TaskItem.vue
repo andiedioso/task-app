@@ -1,9 +1,20 @@
 <template>
-  <li> {{task.name}} <strong>{{task.status}}</strong>
-     <button v-if="task.status==='Pending'" @click="toggleComplete"> Mark As Completed </button>
-    <button @click="removeTask"> Remove </button>
-  </li>
+  <div id="task-item">
+    <li>
+      {{task.name}}
+      <strong
+        v-if="isPending"
+      >{{task.status}}</strong>
+      <button class="btn btn-light" v-if="isPending" @click="toggleComplete">
+        Mark as Complete </button>
+      <button class="btn btn-light" @click="removeTask">
+        Remove </button>
+    </li>
+
+  </div>
+
 </template>
+
 
 <script>
 export default {
@@ -21,6 +32,11 @@ name: 'task-item',
     removeTask() {
       this.$emit('remove-task', this.task.id);
     },
+  },
+  computed: {
+    isPending(){
+      return this.task.status==='Pending';
+    }
   }
 
 
@@ -28,5 +44,20 @@ name: 'task-item',
 </script>
 
 <style scoped>
+#task-item {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  border: none;
+}
 
+
+button {
+  border: solid 1px white;
+  padding: 10px;
+  margin: 10px;
+  outline: none;
+  border-radius: 5px;
+  transition: all 0.5s ease;
+}
 </style>

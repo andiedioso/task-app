@@ -1,11 +1,11 @@
 <template>
   <div id="taskForm">
-    <form @submit.prevent="submitData">
-      <label for="taskName">Task Name</label>
+    <form>
       <input id="taskName" type="text" v-model="enteredTaskName">
-      <button :disabled="isEmpty()"> Add Task </button>
+      <button @click.prevent="submitData" class="btn btn-light" :disabled="isEmpty()"> Add</button>
+      <button class="btn btn-light" @click.prevent="clearInput"> Clear </button>
     </form>
-    <button @click="clearInput"> Clear </button>
+
   </div>
 
 </template>
@@ -38,5 +38,30 @@ name: "AddTask",
 </script>
 
 <style scoped>
+#taskForm{
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  border: none;
+}
 
+input{
+  /*margin-top: 3vh;*/
+  padding: 10px;
+  width: 70%;
+  outline: none;
+  border-radius: 5px;
+}
+
+
+button {
+  border: solid 1px white;
+  padding: 10px;
+  margin: 3vh 1vw 0 1vw;
+  background: transparent;
+  outline: none;
+  border-radius: 5px;
+  transition: all 0.5s ease;
+  color: white;
+}
 </style>
