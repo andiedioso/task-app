@@ -2,9 +2,11 @@
   <div id="task-item">
     <li>
       {{task.name}}
-      <strong
+      <span
         v-if="isPending"
-      >{{task.status}}</strong>
+        :class="[isPending ? 'badge-warning' : 'badge-dark', 'badge badge-pill']"
+      >{{task.status}}</span>
+
       <button class="btn btn-light" v-if="isPending" @click="toggleComplete">
         Mark as Complete </button>
       <button class="btn btn-light" @click="removeTask">
@@ -51,7 +53,6 @@ name: 'task-item',
   border: none;
 }
 
-
 button {
   border: solid 1px white;
   padding: 10px;
@@ -59,5 +60,13 @@ button {
   outline: none;
   border-radius: 5px;
   transition: all 0.5s ease;
+}
+
+#buttons {
+  background-color: #34495E;
+}
+
+.btn {
+  font-size: small;
 }
 </style>

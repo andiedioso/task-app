@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1> Tasks </h1>
+    <h2> Tasks </h2>
     <p> {{ message }}</p>
     <hr>
     <add-task @add-task="addTask"/>
@@ -11,8 +11,6 @@
         @toggle-complete = "markAsComplete"
         @remove-task="removeTask"
     ></task-item>
-
-
 
   </div>
 </template>
@@ -40,8 +38,7 @@ export default {
       const taskPicked = this.taskList.find(
           (el) => el.id === id
       );
-      //check for null
-
+      //console.log(taskPicked.status);
       taskPicked.status = "Complete";
     },
     addTask(newTaskName,pendingStat){
@@ -50,8 +47,9 @@ export default {
         id: this.uuidv4(),
         name: newTaskName,
         status: pendingStat,
+        edit: false,
       }
-      //console.log(newTask);
+      console.log(newTask);
       this.taskList.push(newTask);
     },
     removeTask(id){
@@ -108,13 +106,15 @@ hr{
 
 li {
   background-color: #89e8bd;
-  padding: 3% 2%;
-  margin: 1.5% 0.5%;
+  padding: 10px;
+  margin: 15px;
   text-align: left;
   color: #34495E;
   width: 95%;
   border-radius: 5px;
   list-style-type: none;
 }
+
+
 
 </style>

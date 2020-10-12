@@ -2,8 +2,8 @@
   <div id="taskForm">
     <form>
       <input id="taskName" type="text" v-model="enteredTaskName">
-      <button @click.prevent="submitData" class="btn btn-light" :disabled="isEmpty()"> Add</button>
-      <button class="btn btn-light" @click.prevent="clearInput"> Clear </button>
+        <button @click.prevent="submitData" class="btn btn-light" :disabled="isEmpty()"> Add</button>
+        <button class="btn btn-light" @click.prevent="clearInput"> Clear </button>
     </form>
 
   </div>
@@ -38,7 +38,7 @@ name: "AddTask",
 </script>
 
 <style scoped>
-#taskForm{
+form {
   display: flex;
   justify-content: center;
   flex-direction: row;
@@ -46,11 +46,12 @@ name: "AddTask",
 }
 
 input{
-  /*margin-top: 3vh;*/
+  margin-top: 3vh;
   padding: 10px;
-  width: 70%;
+  width: 60%;
   outline: none;
   border-radius: 5px;
+  max-height: 50px;
 }
 
 
@@ -63,5 +64,9 @@ button {
   border-radius: 5px;
   transition: all 0.5s ease;
   color: white;
+}
+
+.btn {
+  font-size: small;
 }
 </style>
