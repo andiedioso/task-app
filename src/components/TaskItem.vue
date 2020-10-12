@@ -4,23 +4,27 @@
 
       <div class="row">
         <!--      input if edited -->
-        <input
-            v-if="isEdited"
-            v-model="task.name"
-            @blur="editFalse"
-            @keyup.enter="editFalse"
-        >
-        <label
-            v-else
-            @click="editFalse">
-          {{task.name}}
-        </label>
+        <div class="col-6">
+          <input
+              v-if="isEdited"
+              v-model="task.name"
+              @blur="editFalse"
+              @keyup.enter="editFalse"
+              v-focus
+          >
+          <label
+              v-else
+              @click="editFalse">
+            {{task.name}}
+          </label>
 
-        <span
-            :class="[isPending ? 'badge-warning' : 'badge-dark', 'badge badge-pill']"
-        > {{task.status}} </span>
+          <span
+              :class="[isPending ? 'badge-warning' : 'badge-dark', 'badge badge-pill']"
+          > {{task.status}} </span>
+        </div>
 
-        <span class="container">
+
+        <div class="col-6" id="task-item-btn">
           <button
               class="btn btn-light"
               v-if="isPending"
@@ -30,7 +34,7 @@
               class="btn btn-light"
               @click="removeTask">
           Remove </button>
-        </span>
+        </div>
       </div>
 
     </li>
@@ -68,6 +72,13 @@ name: 'task-item',
     isEdited(){
       return this.task.edit;
     }
+  },
+  directives: {
+    focus: {
+      inserted: function (el) {
+        el.focus()
+      }
+    }
   }
 
 
@@ -75,13 +86,26 @@ name: 'task-item',
 </script>
 
 <style scoped>
-#task-item {
+/*#task-item {*/
+/*  display: flex;*/
+/*  justify-content: center;*/
+/*  flex-direction: row;*/
+/*  border: none;*/
+/*}*/
+#task-item-btn{
   display: flex;
-  justify-content: center;
-  flex-direction: row;
-  border: none;
+  justify-content: flex-end;
 }
-
+li {
+  background-color: #89e8bd;
+  padding: 10px;
+  margin: 15px;
+  text-align: left;
+  color: #34495E;
+  width: 95%;
+  border-radius: 5px;
+  list-style-type: none;
+}
 button {
   border: solid 1px white;
   padding: 10px;
@@ -91,8 +115,8 @@ button {
   transition: all 0.5s ease;
 }
 
-label, .badge {
-  padding: inherit;
+label {
+  padding: 15px;
 }
 
 .buttons {
@@ -102,5 +126,8 @@ label, .badge {
 .btn {
   font-size: small;
 }
+
+
+
 
 </style>

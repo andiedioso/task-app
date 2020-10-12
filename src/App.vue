@@ -82,6 +82,7 @@ export default {
 </script>
 
 <style>
+/*@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');*/
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -104,16 +105,6 @@ hr{
   width: 75%;
 }
 
-li {
-  background-color: #89e8bd;
-  padding: 10px;
-  margin: 15px;
-  text-align: left;
-  color: #34495E;
-  width: 95%;
-  border-radius: 5px;
-  list-style-type: none;
-}
 
 
 
