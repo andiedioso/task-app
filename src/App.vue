@@ -18,11 +18,9 @@
 </template>
 
 <script>
-//import TaskItem from './components/TaskItem.vue'
-//import AddTask from './components/AddTask.vue'
-// import TaskList from "@/components/TaskList";
 export default {
-  name: 'App'
+  name: 'App',
+  store,
 }
 </script>
 
