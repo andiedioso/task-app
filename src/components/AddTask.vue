@@ -36,17 +36,17 @@ name: "AddTask",
     },
     submitData(){
       // this.$emit('add-task', this.enteredTaskName, this.defaultStatus);
-      this.$router.push({
-            name: ROUTE_NAME_HOME,
-            params: {
-              task: {
-                id: this.uuidv4(),
-                name: this.enteredTaskName,
-                status: 'Pending',
-                edit: false,
-              },
-            }
+      this.$store.state.taskList.push(
+          {
+            id: this.uuidv4(),
+            name: this.enteredTaskName,
+            status: 'Pending',
+            edit: false,
           }
+      );
+      this.$router.push({
+            name: ROUTE_NAME_HOME
+            }
       );
       this.enteredTaskName = '';
     },

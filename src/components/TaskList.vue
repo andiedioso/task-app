@@ -52,6 +52,7 @@ name: "TaskList",
     console.log('created');
   },
   computed: {
+
     message() {
       //you can reference other computed properties
       if (this.hasTask){

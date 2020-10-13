@@ -3,24 +3,12 @@
 
     <h2> Tasks </h2>
     <router-view></router-view>
-<!--    <p> {{ message }}</p>-->
-<!--    <hr>-->
-<!--    <add-task @add-task="addTask"/>-->
-<!--    <task-item-->
-<!--        v-for="task in taskList"-->
-<!--        :key="task.id"-->
-<!--        :task="task"-->
-<!--        @toggle-complete = "markAsComplete"-->
-<!--        @remove-task="removeTask"-->
-<!--    ></task-item>-->
-<!--    <TaskList></TaskList>-->
   </div>
 </template>
 
 <script>
 export default {
   name: 'App',
-  store,
 }
 </script>
 

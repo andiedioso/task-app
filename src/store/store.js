@@ -1,12 +1,15 @@
 import Vue from 'vue';
-import Vuex from 'vue-x';
+import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
     state:{
-        taskList: [{
-
-        }],
-    }
+        taskList: [{}],
+    },
+    // getters:{
+    //     getList: state => {
+    //         return state.
+    //     }
+    // }
 });
