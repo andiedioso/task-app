@@ -19,7 +19,8 @@
           </label>
 
           <span
-              :class="[isPending ? 'badge-warning' : 'badge-dark', 'badge badge-pill']"
+              class="badge badge-pill"
+              :class="badgeIcon"
           > {{task.status}} </span>
         </div>
 
@@ -36,7 +37,6 @@
           Remove </button>
         </div>
       </div>
-
     </li>
 
   </div>
@@ -71,6 +71,9 @@ name: 'task-item',
     },
     isEdited(){
       return this.task.edit;
+    },
+    badgeIcon(){
+      return this.isPending ? 'badge-warning' : 'badge-dark';
     }
   },
   directives: {
@@ -86,12 +89,7 @@ name: 'task-item',
 </script>
 
 <style scoped>
-/*#task-item {*/
-/*  display: flex;*/
-/*  justify-content: center;*/
-/*  flex-direction: row;*/
-/*  border: none;*/
-/*}*/
+
 #task-item-btn{
   display: flex;
   justify-content: flex-end;

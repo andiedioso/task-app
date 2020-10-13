@@ -8,7 +8,7 @@
       <button
           @click.prevent="submitData"
           class="btn btn-light"
-          :disabled="isEmpty()"> Add</button>
+          :disabled="isEmpty"> Add</button>
       <button
           class="btn btn-light"
           @click.prevent="clearInput"> Clear </button>
@@ -33,7 +33,8 @@ name: "AddTask",
       this.enteredTaskName = '';
     },
     submitData(){
-      this.$emit('add-task', this.enteredTaskName, this.defaultStatus);
+      // this.$emit('add-task', this.enteredTaskName, this.defaultStatus);
+      this.$router.push('/');
       this.enteredTaskName = '';
     },
 
