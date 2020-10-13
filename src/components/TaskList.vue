@@ -14,9 +14,15 @@
 
 <script>
 import TaskItem from "@/components/TaskItem";
+import {ROUTE_NAME_ADD} from "@/route-names";
 export default {
 name: "TaskList",
   components: {TaskItem},
+  props: {
+    task:{
+      type: Object,
+    }
+  },
   data () {
     return {
       taskList: [
@@ -39,6 +45,12 @@ name: "TaskList",
       ],
     }
   },
+  created(){
+    if(this.task){
+      this.taskList.push(this.task);
+    }
+    console.log('created');
+  },
   computed: {
     message() {
       //you can reference other computed properties
@@ -55,7 +67,9 @@ name: "TaskList",
   },
   methods: {
     linkToAdd(){
-      this.$router.push('task-list');
+      this.$router.push(
+          {name: ROUTE_NAME_ADD}
+      );
     },
     markAsComplete(id){
       //find() returns a value that satisfies the condition
@@ -81,12 +95,6 @@ name: "TaskList",
           (friend) => friend.id !== id
       );
     },
-    uuidv4() {
-      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
-        return v.toString(16);
-      });
-    }
   },
 }
 </script>

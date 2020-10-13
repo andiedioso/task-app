@@ -19,6 +19,8 @@
 </template>
 
 <script>
+import {ROUTE_NAME_HOME} from "@/route-names";
+
 export default {
 name: "AddTask",
  emits: ['add-task'],
@@ -34,11 +36,28 @@ name: "AddTask",
     },
     submitData(){
       // this.$emit('add-task', this.enteredTaskName, this.defaultStatus);
-      this.$router.push('/');
+      this.$router.push({
+            name: ROUTE_NAME_HOME,
+            params: {
+              task: {
+                id: this.uuidv4(),
+                name: this.enteredTaskName,
+                status: 'Pending',
+                edit: false,
+              },
+            }
+          }
+      );
       this.enteredTaskName = '';
     },
-
-    //isEmpty could be a computed property
+    uuidv4() {
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+      });
+    }
+  },
+  computed: {
     isEmpty(){
       return this.enteredTaskName==="";
     },

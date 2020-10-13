@@ -4,16 +4,19 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import VueRouter from 'vue-router';
 import AddTask from "@/components/AddTask";
 import TaskList from "@/components/TaskList";
+import RouteNames from "./route-names";
 
 Vue.config.productionTip = false
 Vue.use(VueRouter);
 
 const routes = [
   {path:'/',
-    name: 'task-list',
+    name: RouteNames.home,
     component: TaskList,
     props: true},
-  {path:'/add', component: AddTask}
+  {path:'/add',
+    name: RouteNames.add,
+    component: AddTask}
 ]
 
 const router = new VueRouter({
