@@ -3,18 +3,8 @@
     <li>
 
       <div class="row">
-        <!--      input if edited -->
         <div class="col-6">
-          <input
-              v-if="isEdited"
-              v-model="task.name"
-              @blur="editFalse"
-              @keyup.enter="editFalse"
-              v-focus
-          >
-          <label
-              v-else
-              @click="editFalse">
+          <label>
             {{task.name}}
           </label>
 
@@ -36,7 +26,8 @@
               @click="removeTask">
           Remove </button>
           <button
-            class="btn btn-light">
+            class="btn btn-light"
+            @click="linkToEdit">
             Edit</button>
         </div>
       </div>
@@ -48,6 +39,7 @@
 
 
 <script>
+import {ROUTE_NAME_EDIT} from "@/route-names";
 export default {
 name: 'task-item',
   props: {
@@ -63,31 +55,20 @@ name: 'task-item',
     removeTask() {
       this.$emit('remove-task', this.task.id);
     },
-    editFalse(){
-      this.task.edit = !this.task.edit;
-      console.log(this.task);
+    linkToEdit(){
+      this.$router.push(
+          {name: ROUTE_NAME_EDIT}
+      );
     }
   },
   computed: {
     isPending() {
       return this.task.status === 'Pending';
     },
-    isEdited(){
-      return this.task.edit;
-    },
     badgeIcon(){
       return this.isPending ? 'badge-warning' : 'badge-dark';
     }
   },
-  directives: {
-    focus: {
-      inserted: function (el) {
-        el.focus()
-      }
-    }
-  }
-
-
 }
 </script>
 

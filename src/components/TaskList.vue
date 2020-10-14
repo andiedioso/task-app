@@ -10,6 +10,7 @@
         :task="task"
         @toggle-complete = "markAsComplete(task.id)"
         @remove-task="removeTask"
+        @edit-task="editTask(task.id)"
     ></task-item>
   </div>
 </template>
@@ -72,17 +73,6 @@ name: "TaskList",
           "markAsComplete",
           "removeTask"
     ]),
-    // markAsComplete(id){
-    //   //find() returns a value that satisfies the condition
-    //   const taskPicked = this.taskList.find(
-    //       (el) => el.id === id
-    //   );
-    //   //console.log(taskPicked.status);
-    //   taskPicked.status = "Complete";
-    // },
-    // removeTask(id){
-    //
-    // },
   },
 }
 </script>

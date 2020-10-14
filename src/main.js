@@ -7,6 +7,7 @@ import TaskList from "@/components/TaskList";
 import RouteNames from "./route-names";
 import Vuex from 'vuex';
 import {store} from '@/store/store';
+import EditTask from "@/components/EditTask";
 
 Vue.config.productionTip = false
 Vue.use(VueRouter);
@@ -19,7 +20,12 @@ const routes = [
     props: true},
   {path:'/add',
     name: RouteNames.add,
-    component: AddTask}
+    component: AddTask},
+  {path: '/edit',
+    name: RouteNames.edit,
+    component: EditTask,
+    props: true,
+  }
 ]
 
 const router = new VueRouter({

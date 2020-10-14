@@ -35,7 +35,10 @@ export const store = new Vuex.Store({
             state.taskList = state.taskList.filter(
                 (el) => el.id !== payload_id
             );
-        }
+        },
+        // editTask: (state, payload) => {
+        //
+        // }
     },
     actions:{
         addToList: ({commit}, payload) => {

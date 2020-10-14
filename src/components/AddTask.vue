@@ -40,7 +40,6 @@ name: "AddTask",
             id: this.uuidv4(),
             name: this.enteredTaskName,
             status: 'Pending',
-            edit: false,
           }
       );
       //go back to home path
