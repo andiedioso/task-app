@@ -10,7 +10,15 @@ export const store = new Vuex.Store({
     getters:{
         getList: state => {
             return state.taskList;
-        }
+        },
+        getSummary: state => {
+            if (state.taskList.length===0){
+                return 'You have no tasks';
+            } else if (state.taskList.some(el => el.status === 'Pending')){
+                return 'You have some pending tasks';
+            }
+            return 'All tasks are completed.';
+        },
     },
     mutations:{
         addToList: (state, payload) => {
