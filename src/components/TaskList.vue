@@ -1,12 +1,13 @@
 <template>
   <div id="task-items">
-    <router-link to="/add">Add task</router-link>
-    <button @click="linkToAdd">Add</button>
+    <button
+        class="btn btn-success"
+        @click="linkToAdd">Add a Task</button>
     <task-item
-        v-for="task in taskList"
+        v-for="task in getList"
         :key="task.id"
         :task="task"
-        @toggle-complete = "markAsComplete"
+        @toggle-complete = "markAsComplete(task.id)"
         @remove-task="removeTask"
     ></task-item>
   </div>
@@ -15,6 +16,7 @@
 <script>
 import TaskItem from "@/components/TaskItem";
 import {ROUTE_NAME_ADD} from "@/route-names";
+import {mapGetters, mapActions} from 'vuex';
 export default {
 name: "TaskList",
   components: {TaskItem},
@@ -25,20 +27,9 @@ name: "TaskList",
   },
   data () {
     return {
-      taskList: [
-        {
+      taskList: [{
           id: '1',
           name: 'Task A',
-          status: 'Pending',
-          edit: false,
-        }, {
-          id: '2',
-          name: 'Task B',
-          status: 'Pending',
-          edit: false,
-        }, {
-          id: '3',
-          name: 'Task C',
           status: 'Pending',
           edit: false,
         }
@@ -52,6 +43,9 @@ name: "TaskList",
     console.log('created');
   },
   computed: {
+    ...mapGetters([
+          "getList"
+    ]),
 
     message() {
       //you can reference other computed properties
@@ -72,30 +66,21 @@ name: "TaskList",
           {name: ROUTE_NAME_ADD}
       );
     },
-    markAsComplete(id){
-      //find() returns a value that satisfies the condition
-      const taskPicked = this.taskList.find(
-          (el) => el.id === id
-      );
-      //console.log(taskPicked.status);
-      taskPicked.status = "Complete";
-    },
-    addTask(newTaskName,pendingStat){
-      console.log(newTaskName);
-      const newTask = {
-        id: this.uuidv4(),
-        name: newTaskName,
-        status: pendingStat,
-        edit: false,
-      }
-      console.log(newTask);
-      this.taskList.push(newTask);
-    },
-    removeTask(id){
-      this.taskList = this.taskList.filter(
-          (friend) => friend.id !== id
-      );
-    },
+    ...mapActions([
+          "markAsComplete",
+          "removeTask"
+    ]),
+    // markAsComplete(id){
+    //   //find() returns a value that satisfies the condition
+    //   const taskPicked = this.taskList.find(
+    //       (el) => el.id === id
+    //   );
+    //   //console.log(taskPicked.status);
+    //   taskPicked.status = "Complete";
+    // },
+    // removeTask(id){
+    //
+    // },
   },
 }
 </script>

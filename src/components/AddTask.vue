@@ -13,14 +13,14 @@
           class="btn btn-light"
           @click.prevent="clearInput"> Clear </button>
     </form>
-
+    <p>{{enteredTaskName}}</p>
   </div>
 
 </template>
 
 <script>
 import {ROUTE_NAME_HOME} from "@/route-names";
-
+// import {mapActions} from "vuex";
 export default {
 name: "AddTask",
  emits: ['add-task'],
@@ -35,7 +35,6 @@ name: "AddTask",
       this.enteredTaskName = '';
     },
     submitData(){
-      // this.$emit('add-task', this.enteredTaskName, this.defaultStatus);
       this.$store.state.taskList.push(
           {
             id: this.uuidv4(),
@@ -44,6 +43,7 @@ name: "AddTask",
             edit: false,
           }
       );
+      //go back to home path
       this.$router.push({
             name: ROUTE_NAME_HOME
             }

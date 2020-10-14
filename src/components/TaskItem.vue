@@ -35,6 +35,9 @@
               class="btn btn-light"
               @click="removeTask">
           Remove </button>
+          <button
+            class="btn btn-light">
+            Edit</button>
         </div>
       </div>
     </li>
