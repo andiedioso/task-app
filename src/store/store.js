@@ -21,13 +21,13 @@ export const store = new Vuex.Store({
         },
     },
     mutations:{
-        addToList: (state, payload) => {
-            state.taskList.push(payload)
-        },
+        // addToList: (state, payload) => {
+        //     state.taskList.push(payload)
+        // },
         markAsComplete: (state, payload_id) => {
             const taskPicked = state.taskList.find(
                 (el) => el.id === payload_id
-            ).status = "Complete";
+            );
             //console.log(taskPicked.status);
             taskPicked.status = "Complete";
         },
@@ -36,9 +36,14 @@ export const store = new Vuex.Store({
                 (el) => el.id !== payload_id
             );
         },
-        // editTask: (state, payload) => {
-        //
-        // }
+        editTask: (state, payload) => {
+            const taskToEdit = state.taskList.find(
+                (el) => el.id === payload.id
+            );
+            if(taskToEdit){
+                taskToEdit.name = payload.name;
+            }
+        }
     },
     actions:{
         addToList: ({commit}, payload) => {
@@ -49,6 +54,9 @@ export const store = new Vuex.Store({
         },
         removeTask: ({commit}, payload_id) =>{
             commit('removeTask', payload_id)
-        }
+        },
+        editTask: ({commit}, payload) =>{
+            commit('editTask', payload)
+        },
     }
 });

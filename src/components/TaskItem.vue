@@ -1,7 +1,6 @@
 <template>
   <div id="task-item">
     <li>
-
       <div class="row">
         <div class="col-6">
           <label>
@@ -55,10 +54,14 @@ name: 'task-item',
     removeTask() {
       this.$emit('remove-task', this.task.id);
     },
+    //emit
     linkToEdit(){
-      this.$router.push(
-          {name: ROUTE_NAME_EDIT}
-      );
+      this.$router.push({
+        name: ROUTE_NAME_EDIT,
+        params: {
+          task: this.task
+        }
+      })
     }
   },
   computed: {
@@ -67,7 +70,7 @@ name: 'task-item',
     },
     badgeIcon(){
       return this.isPending ? 'badge-warning' : 'badge-dark';
-    }
+    },
   },
 }
 </script>

@@ -10,7 +10,6 @@
         :task="task"
         @toggle-complete = "markAsComplete(task.id)"
         @remove-task="removeTask"
-        @edit-task="editTask(task.id)"
     ></task-item>
   </div>
 </template>
@@ -39,9 +38,9 @@ name: "TaskList",
     }
   },
   created(){
-    if(this.task){
-      this.taskList.push(this.task);
-    }
+    // if(this.task){
+    //   this.taskList.push(this.task);
+    // }
     console.log('created');
   },
   computed: {
@@ -49,19 +48,6 @@ name: "TaskList",
           "getList",
           "getSummary"
     ]),
-    //
-    // message() {
-    //   //you can reference other computed properties
-    //   if (this.hasTask){
-    //     return 'You have no tasks';
-    //   } else if (this.taskList.some(el => el.status === 'Pending')){
-    //     return 'You have some pending tasks';
-    //   }
-    //   return 'All tasks are completed.';
-    // },
-    // hasTask() {
-    //   return this.taskList.length===0;
-    // }
   },
   methods: {
     linkToAdd(){
